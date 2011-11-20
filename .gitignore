@@ -1,19 +1,28 @@
-# Ignore Compiled source and Debug Files #
-##########################################
-*.sln.cache
-_ReSharper.*
-bin
-obj
-build
-dist
-*.suo
-*resharper*
+#ignore thumbnails created by windows
+Thumbs.db
+#Ignore files build by Visual Studio
+*.obj
+*.pdb
 *.user
-TestResult.xml
-specs.html
-*.nupkg
-*.psd
-*.PSD
-*.fdb
-*.xml
-App_Data/Elmah.Errors/*.xml
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+ClientBin
+[Bb]in
+[Dd]ebug*/
+*.lib
+*.sbr
+obj/
+[Rr]elease*/
+_ReSharper*/
+[Tt]est[Rr]esult*
