@@ -19,7 +19,9 @@ namespace TropoCSharp.Tropo
             AccountId = (string)session["session"]["accountId"];
             Id = (string)session["session"]["id"];
             InitialText = (string)session["session"]["initialText"];
-            Timestamp = (string)session["session"]["timestamp"];
+            // Later versions of JSON.Net parse date strings as type 'Date' instead of type 'String'
+            var ts = session["session"]["timestamp"];
+            Timestamp = ts.ToString();
             UserType = (string)session["session"]["userType"];
 
             if (session["session"]["from"] != null)
