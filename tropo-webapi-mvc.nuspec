@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>tropo-webapi-mvc</id>
-    <version>1.0.1</version>
+    <version>1.1.0</version>
     <title>Tropo Web API - ASP.NET MVC Addition</title>
     <authors>Tropo, Khalid Abuhakmeh, Darryl Jacobs</authors>
     <owners>Darryl Jacobs</owners>
@@ -13,10 +13,10 @@
     <summary />
     <tags>Telephony, Tropo, C#, Web, API, ASP.NET MVC</tags>
     <dependencies>
-      <dependency id="tropo-webapi" version="1.0.2" />
+      <dependency id="tropo-webapi" version="1.1.0" />
     </dependencies>
   </metadata>
   <files>
-    <file src=".\TropoCSharp.Mvc\bin\Release\TropoCSharp.Mvc.dll" target="lib\net40\TropoCSharp.Mvc.dll" />
+    <file src="TropoCSharp.Mvc\bin\Release\TropoCSharp.Mvc.dll" target="lib\net40\TropoCSharp.Mvc.dll" />
   </files>
 </package>
