@@ -13,7 +13,7 @@ namespace TropoCSharp.Mvc
     public abstract class TropoController : Controller
     {
         private const string TropoUrl =
-            "https://api.tropo.com/1.0/sessions/{1}/signals?action=signal&value={2}&token=#{0}";
+            "https://api.tropo.com/1.0/sessions/{0}/signals?action=signal&value={1}";
 
         /// <summary>
         /// Remember to intialize the ApiToken property
@@ -65,7 +65,7 @@ namespace TropoCSharp.Mvc
             const string resultError = "Error";
             ValidateApiToken();
 
-            var url = string.Format(TropoUrl, ApiToken, sessionId, eventName);
+            var url = string.Format(TropoUrl, sessionId, eventName);
             var httpRequest = WebRequest.Create(url);
             httpRequest.Method = "GET";
 
@@ -112,7 +112,7 @@ namespace TropoCSharp.Mvc
         /// <returns></returns>
         protected string SignalTo(string sessionId, string eventName = Event.Continue)
         {
-            return string.Format(TropoUrl, ApiToken, sessionId, eventName);
+            return string.Format(TropoUrl, sessionId, eventName);
         }
 
         /// <summary>

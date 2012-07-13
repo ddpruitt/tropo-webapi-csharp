@@ -31,7 +31,7 @@ namespace TropoClassesTests
         {
             var testController = new TestController();
             var url = testController.TestSignalTo(testSessionId);
-            var expectedUrl = string.Format(TestController.TropoSignalTemplate, testApiToken, testSessionId, Event.Continue);
+            var expectedUrl = string.Format(TestController.TropoSignalTemplate, testSessionId, Event.Continue);
 
             Assert.NotNull(url);
             Assert.AreEqual(expectedUrl, url);
@@ -71,7 +71,7 @@ namespace TropoClassesTests
         {
             // copied from TropoController source
             private const string TropoUrl =
-                "https://api.tropo.com/1.0/sessions/{1}/signals?action=signal&value={2}&token=#{0}";
+                "https://api.tropo.com/1.0/sessions/{0}/signals?action=signal&value={1}";
 
             public TestController()
             {
