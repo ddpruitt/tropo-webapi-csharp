@@ -57,9 +57,9 @@ namespace TropoCSharp.Mvc
         /// <summary>
         /// Will perform a web request to signal an existing session, please remember to specify the event if necessary.
         /// </summary>
-        /// <param name="sessionId"></param>
-        /// <param name="eventName"></param>
-        /// <returns></returns>
+        /// <param name="sessionId">The 16 byte GUID session ID.</param>
+        /// <param name="eventName">The name of the event.</param>
+        /// <returns>A string that gives the status of the signal request.</returns>
         protected string Signal(string sessionId, string eventName = Event.Continue)
         {
             const string resultError = "Error";
@@ -70,26 +70,19 @@ namespace TropoCSharp.Mvc
             httpRequest.Method = "GET";
 
             string result;
-            try
+            var response = httpRequest.GetResponse();
+            using (var stream = response.GetResponseStream())
             {
-                var response = httpRequest.GetResponse();
-                using (var stream = response.GetResponseStream())
+                if (null != stream)
                 {
-                    if (null != stream)
-                    {
-                        var doc = XDocument.Load(stream);
-                        var status = doc.Descendants("status").First();
-                        result = (status != null) ? status.Value : resultError;
-                    }
-                    else
-                    {
-                        result = resultError;
-                    }
+                    var doc = XDocument.Load(stream);
+                    var status = doc.Descendants("status").First();
+                    result = (status != null) ? status.Value : resultError;
                 }
-            }
-            catch (Exception)
-            {
-                result = resultError;
+                else
+                {
+                    result = resultError;
+                }
             }
 
             return result;
@@ -107,9 +100,9 @@ namespace TropoCSharp.Mvc
         /// <example>
         /// If you current session hangs up, then tropo could use this url to tell another session to continue to the next step.
         /// </example>
-        /// <param name="sessionId"></param>
-        /// <param name="eventName"></param>
-        /// <returns></returns>
+        /// <param name="sessionId">The 16 byte GUID session ID.</param>
+        /// <param name="eventName">The name of the event.</param>
+        /// <returns>The url for the web service request that will generate the signal.</returns>
         protected string SignalTo(string sessionId, string eventName = Event.Continue)
         {
             return string.Format(TropoUrl, sessionId, eventName);
