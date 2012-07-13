@@ -74,6 +74,7 @@
     <Compile Include="TropoJSON.cs" />
     <Compile Include="TropoResult.cs" />
     <Compile Include="TropoSession.cs" />
+    <Compile Include="TropoUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

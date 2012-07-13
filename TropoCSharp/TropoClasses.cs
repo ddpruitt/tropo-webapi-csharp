@@ -19,11 +19,17 @@ namespace TropoCSharp.Tropo
         [JsonProperty(PropertyName = "bargein")]
         public bool? Bargein { get; set; }
 
+        [JsonProperty(PropertyName = "interdigitTimeout")]
+        public int? InterdigitTimeout { get; set; }
+
         [JsonProperty(PropertyName = "minConfidence")]
         public int? MinConfidence { get; set; }
 
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
+
+        [JsonProperty(PropertyName = "recognizer")]
+        public string Recognizer { get; set; }
 
         [JsonProperty(PropertyName = "required")]
         public bool? Required { get; set; }
