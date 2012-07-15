@@ -1,14 +1,16 @@
 Overview
 ========
 
+This is a fork of khalidabuhakmeh's [TropoCSharp project](https://github.com/khalidabuhakmeh/tropo-webapi-csharp), which adds MVC classes to the mainstram TropoCSharp library.  This fork adds improvements to the TropoController.Signal method, and code changes to work with the latest [JSON.Net framework](http://json.codeplex.com/).
+
 TropoCSharp is a set of C# classes for working with the [Tropo cloud communication service](http://tropo.com/). Tropo allows a developer to create applications that run over the phone, IM, SMS, and Twitter using web technologies. This library communicates with Tropo over JSON.
 
 Usage
 =====
 
-You can download this project directly and build the source or install fron NuGet.
+You can download this project directly and build the source.  The project depends on JSON.Net version 4.5.7 or later.
 
-PM > Install-Package tropo-webapi
+You can also build nuget packages and install them from a local nuget repository.  This fork is not currently available from the official NuGet repository.  To avoid confusion with the official version, the package version of this fork has been set to 1.1.0.
 
 You can test samples in the TropoSamples solution by viewing them in a web browser, or via HTTP POST (which is how the Tropo WebAPI interacts with web applications).
 
