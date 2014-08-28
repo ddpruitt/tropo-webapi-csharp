@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Xml.Linq;
 using TropoCSharp.Structs;
@@ -54,23 +55,10 @@ namespace TropoCSharp.Mvc
             return Url.Action(action, controllerName, values, protocol);
         }
 
-        /// <summary>
-        /// Will perform a web request to signal an existing session, please remember to specify the event if necessary.
-        /// </summary>
-        /// <param name="sessionId">The 16 byte GUID session ID.</param>
-        /// <param name="eventName">The name of the event.</param>
-        /// <returns>A string that gives the status of the signal request.</returns>
-        protected string Signal(string sessionId, string eventName = Event.Continue)
+        private string GetSignalResult(WebResponse response)
         {
             const string resultError = "Error";
-            ValidateApiToken();
-
-            var url = string.Format(TropoUrl, sessionId, eventName);
-            var httpRequest = WebRequest.Create(url);
-            httpRequest.Method = "GET";
-
             string result;
-            var response = httpRequest.GetResponse();
             using (var stream = response.GetResponseStream())
             {
                 if (null != stream)
@@ -83,6 +71,51 @@ namespace TropoCSharp.Mvc
                 {
                     result = resultError;
                 }
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Will perform a web request to signal an existing session, please remember to specify the event if necessary.
+        /// </summary>
+        /// <param name="sessionId">The 16 byte GUID session ID.</param>
+        /// <param name="eventName">The name of the event.</param>
+        /// <returns>A string that gives the status of the signal request.</returns>
+        protected string Signal(string sessionId, string eventName = Event.Continue)
+        {
+            ValidateApiToken();
+
+            var url = string.Format(TropoUrl, sessionId, eventName);
+            var httpRequest = WebRequest.Create(url);
+            httpRequest.Method = "GET";
+
+            string result;
+            using (var response = httpRequest.GetResponse())
+            {
+                result = GetSignalResult(response);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Asynchronous function to signal an existing session.
+        /// </summary>
+        /// <param name="sessionId">The 16 byte GUID session ID.</param>
+        /// <param name="eventName">The name of the event.</param>
+        /// <returns>A task that returns the status of the signal request.</returns>
+        protected async Task<string> SignalAsync(string sessionId, string eventName = Event.Continue)
+        {
+            ValidateApiToken();
+
+            var url = string.Format(TropoUrl, sessionId, eventName);
+            var httpRequest = WebRequest.Create(url);
+            httpRequest.Method = "GET";
+
+            string result;
+            using (var response = await httpRequest.GetResponseAsync())
+            {
+                result = GetSignalResult(response);
             }
 
             return result;

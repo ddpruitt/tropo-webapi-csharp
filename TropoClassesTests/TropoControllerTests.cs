@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -47,6 +48,16 @@ namespace TropoClassesTests
             Assert.AreEqual(result, "QUEUED");
         }
 
+        [Test]
+        public void Can_Parse_Async_Signal_Response()
+        {
+            var testController = new TestController();
+            var result = testController.TestSignalAsync(testSessionId);
+
+            Assert.NotNull(result);
+            Assert.AreEqual(result, "QUEUED");
+        }
+
         internal class TestSignalWebRequest : IWebRequestCreate
         {
             private const string ResponseTemplate = "<signal><status>{0}</status></signal>";
@@ -63,6 +74,7 @@ namespace TropoClassesTests
                 response.Setup(r => r.GetResponseStream()).Returns(new MemoryStream(Encoding.UTF8.GetBytes(signalResponse)));
                 var request = new Mock<WebRequest>();
                 request.Setup(r => r.GetResponse()).Returns(response.Object);
+                request.Setup(r => r.GetResponseAsync()).Returns(Task.FromResult(response.Object));
                 return request.Object;
             }
         }
@@ -91,6 +103,11 @@ namespace TropoClassesTests
             public string TestSignal(string sessionId, string eventName = Event.Continue)
             {
                 return Signal(sessionId, eventName);
+            }
+
+            public string TestSignalAsync(string sessionId, string eventName = Event.Continue)
+            {
+                return SignalAsync(sessionId, eventName).Result;
             }
         }
     }
