@@ -8,9 +8,9 @@ TropoCSharp is a set of C# classes for working with the [Tropo cloud communicati
 Usage
 =====
 
-You can download this project directly and build the source.  The project depends on JSON.Net version 4.5.7 or later.
+You can download this project directly and build the source.  The project has been updated for .Net 4.5 and Visual Studio 2013. The project depends on ASP.Net MVC 5.2 and JSON.Net version 4.5.7 or later.
 
-You can also build nuget packages and install them from a local nuget repository.  This fork is not currently available from the official NuGet repository.  To avoid confusion with the official version, the package version of this fork has been set to 1.1.0.
+You can also build nuget packages and install them from a local nuget repository.  This fork is not currently available from the official NuGet repository.  To avoid confusion with the official version, the package version of this fork has been set to 1.2.0.
 
 You can test samples in the TropoSamples solution by viewing them in a web browser, or via HTTP POST (which is how the Tropo WebAPI interacts with web applications).
 
