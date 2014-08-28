@@ -56,7 +56,7 @@ namespace TropoCSharp.Tropo
         /// <param name="minConfidence">How confident should Tropo be in a speech recognition match?</param>
         /// <param name="name">identifies the return value of an ask, so you know the context for the returned information.</param>
         /// <param name="required">Is input required here?</param>
-        /// <param name="say">This determines what is played or sent to the caller.</param>
+        /// <param name="says">This determines what is played or sent to the caller.</param>
         /// <param name="timeout">The amount of time Tropo will wait, in seconds, after sending or playing the prompt for the user to begin a response.</param>
         public void Ask(int? attempts, bool? bargein, Choices choices, int? minConfidence, string name, bool? required, IEnumerable<Say> says, float? timeout)
         {
@@ -111,6 +111,7 @@ namespace TropoCSharp.Tropo
         /// Overload method for Ask that allows events to be set via allowSignals.
         /// </summary>
         /// <param name="attempts">How many times the caller can attempt input before an error is thrown.</param>
+        /// <param name="allowSignals">Allows for the assignment of an interruptable signal for this Tropo function</param>
         /// <param name="bargein">Should the user be allowed to barge in before TTS is complete?</param>
         /// <param name="choices">The grammar to use in recognizing and validating input</param>
         /// <param name="minConfidence">How confident should Tropo be in a speech reco match?</param>
@@ -118,7 +119,6 @@ namespace TropoCSharp.Tropo
         /// <param name="required">Is input required here?</param>
         /// <param name="says">This determines what is played or sent to the caller.</param>
         /// <param name="timeout">The amount of time Tropo will wait, in seconds, after sending or playing the prompt for the user to begin a response.</param>
-        /// <param name="events">??</param>
         public void Ask(int? attempts, Array allowSignals, bool? bargein, Choices choices, int? minConfidence, string name, bool? required, IEnumerable<Say> says, float? timeout)
         {
             Ask ask = new Ask();
@@ -581,6 +581,7 @@ namespace TropoCSharp.Tropo
         /// Overload for Record that allows all events
         /// </summary>
         /// <param name="attempts">How many times the caller can attempt input before an error is thrown.</param>
+        /// <param name="allowSignals">Allows for the assignment of an interruptable signal for this Tropo function</param>
         /// <param name="bargein">Should the user be allowed to barge in before TTS is complete?</param>
         /// <param name="beep">When set to true, callers will hear a tone indicating the recording has begun.</param>
         /// <param name="choices">The grammar to use in recognizing and validating input.</param>
@@ -824,7 +825,6 @@ namespace TropoCSharp.Tropo
         /// <param name="choices">The grammar to use in recognizing and validating input.</param>
         /// <param name="from">A string representing who the call is from.</param>
         /// <param name="on">An On object.</param>
-        /// <param name="ringRepeat">The number of rings to allow on the outbound call attempt.</param>
         /// <param name="timeout">The amount of time Tropo will wait, in seconds, after sending or playing the prompt for the user to begin a response.</param>
         /// <param name="to">The new destination for the incoming call as a URL.</param>
         public void Transfer(bool? answerOnMedia, Choices choices, string from, On on, float? timeout,  IEnumerable<String> to)
@@ -871,6 +871,7 @@ namespace TropoCSharp.Tropo
         /// <param name="allowSignals">Allows for the assignment of an interruptable signal for this Tropo function</param>
         /// <param name="choices"></param>
         /// <param name="from"></param>
+        /// <param name="interdigitTimeout"></param>
         /// <param name="on"></param>
         /// <param name="timeout"></param>
         /// <param name="to"></param>
@@ -915,7 +916,7 @@ namespace TropoCSharp.Tropo
         /// Overload for Wait that allows the thread to sleep in milliseconds
         /// </summary>
         /// <param name="milliseconds">Sleep in milliseconds</param>
-        /// <param name="milliseconds">Allows for the assignment of an interruptable signal for this Tropo function</param>
+        /// <param name="allowSignals">Allows for the assignment of an interruptable signal for this Tropo function</param>
         public void Wait(int? milliseconds, Array allowSignals)
         {
             Wait wait = new Wait();
@@ -928,7 +929,7 @@ namespace TropoCSharp.Tropo
         /// <summary>
         /// Overload for Wait that allows a Wait object to be passed directly.
         /// </summary>
-        /// <param name="transfer">Sleep in milliseconds</param>
+        /// <param name="wait">Sleep in milliseconds</param>
         public void Wait(Wait wait)
         {
             Wait(wait.Milliseconds, wait.AllowSignals);
